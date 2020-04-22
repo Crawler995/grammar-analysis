@@ -1,5 +1,5 @@
 {
-  "name": "grammer",
+  "name": "grammar-type-judgment",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +18,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "format": "prettier --config .prettierrc --write ./{src,test}/**/*.{ts,tsx} --exclude ./src/serviceWorker.ts",
+    "test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/**/*.ts'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -35,5 +36,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/sinon": "^9.0.0",
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
+    "mocha": "^7.1.1",
+    "prettier": "^2.0.5",
+    "sinon": "^9.0.2",
+    "ts-node": "^8.9.0"
   }
 }
