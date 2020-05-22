@@ -159,4 +159,38 @@ describe('getFirstSet.ts (getFirstSet())', () => {
       expect(getFirstSet(grammar, ['D', 'C'])).to.deep.equal(['b', 'd', EMPTY]);
     });
   });
+
+  describe(`E->TE', E'->+TE'|EMPTY, T->FT', T'->*FT'|EMPTY, F->(E)|i`, () => {
+    const grammar: Grammar = {
+      nonTerminals: ['E', "E'", 'T', "T'", 'F'],
+      terminals: ['+', '*', '(', ')', 'i'],
+      productions: [
+        {
+          left: ['E'],
+          right: [['T', "E'"]]
+        },
+        {
+          left: ["E'"],
+          right: [['+', 'T', "E'"], [EMPTY]]
+        },
+        {
+          left: ['T'],
+          right: [['F', "T'"]]
+        },
+        {
+          left: ["T'"],
+          right: [['*', 'F', "T'"], [EMPTY]]
+        },
+        {
+          left: ['F'],
+          right: [['(', 'E', ')'], ['i']]
+        }
+      ],
+      startSymbol: 'E'
+    };
+
+    it(`FIRST(TE') = {(, i}`, () => {
+      expect(getFirstSet(grammar, ['T', "E'"])).to.deep.equal(['(', 'i']);
+    });
+  });
 });

@@ -1,7 +1,7 @@
 import { Grammar, GSymbol, EMPTY, NonTerminal } from './types/grammar';
 import getCandidates from './utils/getCandidates';
 import getIsArgumentInGrammar from './utils/getIsArgumentInGrammar';
-import getInferredGSymbols from './utils/getInferredGSymbols';
+import getIsCanInferEmpty from './utils/getIsCanInferEmpty';
 
 /**
  * Get FIRST(*).
@@ -82,8 +82,7 @@ const getFirstSet = (
         const curFirstSetWithoutEmpty = curFirstSet.filter(symbol => symbol !== EMPTY);
         res.push(...curFirstSetWithoutEmpty);
 
-        const inferredGSymbols = getInferredGSymbols(grammar, [argument[i]]);
-        isAllPreInferredGSymbolsContainsEmpty = inferredGSymbols.indexOf(EMPTY) > -1;
+        isAllPreInferredGSymbolsContainsEmpty = getIsCanInferEmpty(grammar, argument[i]);
       } else {
         isAllFirstSetContainsEmpty = false;
         break;
