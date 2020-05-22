@@ -34,6 +34,8 @@ export const EMPTY = 'ε';
  */
 export const PRIME = "'";
 
+export const END = '#';
+
 /**
  * Symbol is a type in JavaScript(ES6), so use GSymbol which means VT∪VN.
  */
