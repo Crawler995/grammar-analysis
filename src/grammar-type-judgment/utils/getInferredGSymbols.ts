@@ -1,26 +1,54 @@
-import { Grammar, GSymbol } from '../types/grammar';
-import getIsGSymbolSetEqual from './getIsGSymbolSetEqual';
+import { Grammar, GSymbol, NonTerminal, EMPTY } from '../types/grammar';
+import getCandidates from './getCandidates';
 
 /**
- * Get the inferred symbols (the right) by the given left symbol.
+ * Assert that the given grammar is a two grammar.
+ *
  * e.g.
- * A -> ab | c
- * 
- * left: A
- * output: [['a', 'b'], ['c']]
+ * A -> BC
+ * B -> a|EMPTY
+ * C -> aD|b|EMPTY
+ * D -> cb
+ *
+ * argument: ['A']
+ * output: ['a', 'acb', 'b', EMPTY]
  */
-const getInferredGSymbols = (grammar: Grammar, left: GSymbol[]) => {
-  const { productions } = grammar;
+const getInferredGSymbols = (
+  grammar: Grammar,
+  args: GSymbol[],
+  cache: NonTerminal[] = []
+): GSymbol[] => {
+  const res: GSymbol[] = [];
 
-  for (let i = 0; i < productions.length; i++) {
-    const production = productions[i];
+  for (let i = 0; i < args.length; i++) {
+    const curArgs = args[i];
+    if (grammar.terminals.includes(curArgs) || curArgs === EMPTY) {
+      res.push(curArgs);
+      continue;
+    }
 
-    if (getIsGSymbolSetEqual(production.left, left)) {
-      return production.right;
+    if (cache.includes(curArgs)) {
+      continue;
+    }
+
+    if (grammar.nonTerminals.includes(curArgs)) {
+      cache.push(curArgs);
+    }
+
+    // [['B', 'C']]
+    const candidates = getCandidates(grammar, [curArgs]);
+
+    candidates.forEach(candidate => {
+      const inferredGSymbols = getInferredGSymbols(grammar, candidate, cache);
+      res.push(...inferredGSymbols);
+    });
+
+    if (grammar.nonTerminals.includes(curArgs)) {
+      cache.pop();
     }
   }
 
-  return null;
+  return [...new Set(res)].sort();
 };
 
 export default getInferredGSymbols;

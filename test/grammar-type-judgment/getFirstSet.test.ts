@@ -2,27 +2,8 @@ import { describe, it, before, after } from 'mocha';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 
-import { Grammar } from '../../src/grammar-type-judgment/types/grammar';
+import { Grammar, EMPTY } from '../../src/grammar-type-judgment/types/grammar';
 import getFirstSet from '../../src/grammar-type-judgment/getFirstSet';
-
-// const grammar: Grammar = {
-//   nonTerminals: ['S', 'A', 'B', 'C'],
-//   terminals: ['a', 'b', 'c', 'd', 'e', 'g', 'f', EMPTY],
-//   productions: [{
-//     left: ['S'],
-//     right: [['a', 'A', 'B', 'b', 'c', 'd'], [EMPTY]]
-//   }, {
-//     left: ['A'],
-//     right: [['A', 'S', 'd'], [EMPTY]]
-//   }, {
-//     left: ['B'],
-//     right: [['e', 'C'], ['S', 'A', 'h'], [EMPTY]]
-//   }, {
-//     left: ['C'],
-//     right: [['S', 'f'], ['C', 'g'], [EMPTY]]
-//   }],
-//   startSymbol: 'S'
-// };
 
 describe('getFirstSet.ts (getFirstSet())', () => {
   let consoleStub;
@@ -33,7 +14,7 @@ describe('getFirstSet.ts (getFirstSet())', () => {
     consoleStub.restore();
   });
 
-  describe('G: S->Ap|Bq, A->a|cA, B->b|dB (no left recursion)', () => {
+  describe('S->Ap|Bq, A->a|cA, B->b|dB (no left recursion)', () => {
     const grammar: Grammar = {
       nonTerminals: ['S', 'A', 'B'],
       terminals: ['a', 'b', 'c', 'd', 'p', 'q'],
@@ -79,6 +60,103 @@ describe('getFirstSet.ts (getFirstSet())', () => {
 
     it('FIRST(dB) = {d}', () => {
       expect(getFirstSet(grammar, ['d', 'B'])).to.deep.equal(['d']);
+    });
+  });
+
+  describe('S->aABbcd|EMPTY, A->ASd|EMPTY, B->eC|SAh|EMPTY, C->Sf|Cg|EMPTY (direct left recursion)', () => {
+    const grammar: Grammar = {
+      nonTerminals: ['S', 'A', 'B', 'C'],
+      terminals: ['a', 'b', 'c', 'd', 'e', 'g', 'f', 'h', EMPTY],
+      productions: [
+        {
+          left: ['S'],
+          right: [['a', 'A', 'B', 'b', 'c', 'd'], [EMPTY]]
+        },
+        {
+          left: ['A'],
+          right: [['A', 'S', 'd'], [EMPTY]]
+        },
+        {
+          left: ['B'],
+          right: [['e', 'C'], ['S', 'A', 'h'], [EMPTY]]
+        },
+        {
+          left: ['C'],
+          right: [['S', 'f'], ['C', 'g'], [EMPTY]]
+        }
+      ],
+      startSymbol: 'S'
+    };
+
+    it('FIRST(A) = {a, d, EMPTY}', () => {
+      expect(getFirstSet(grammar, ['A'])).to.deep.equal(['a', 'd', EMPTY]);
+    });
+    it('FIRST(S) = {a, EMPTY}', () => {
+      expect(getFirstSet(grammar, ['S'])).to.deep.equal(['a', EMPTY]);
+    });
+    it('FIRST(B) = {a, d, e, h, EMPTY}', () => {
+      expect(getFirstSet(grammar, ['B'])).to.deep.equal(['a', 'd', 'e', 'h', EMPTY]);
+    });
+  });
+
+  describe('S->Aa|EMPTY, A->Sb|EMPTY (indirect left recursion)', () => {
+    const grammar: Grammar = {
+      nonTerminals: ['S', 'A'],
+      terminals: ['a', 'b'],
+      productions: [
+        {
+          left: ['S'],
+          right: [['A', 'a'], [EMPTY]]
+        },
+        {
+          left: ['A'],
+          right: [['S', 'b'], [EMPTY]]
+        }
+      ],
+      startSymbol: 'S'
+    };
+
+    it('FIRST(S) = {a, b, EMPTY}', () => {
+      expect(getFirstSet(grammar, ['S'])).to.deep.equal(['a', 'b', EMPTY]);
+    });
+    it('FIRST(A) = {a, b, EMPTY}', () => {
+      expect(getFirstSet(grammar, ['A'])).to.deep.equal(['a', 'b', EMPTY]);
+    });
+  });
+
+  describe('S->AB, A->Ba|EMPTY, B->DC, C->b|EMPTY, D->d|EMPTY', () => {
+    const grammar: Grammar = {
+      nonTerminals: ['S', 'A', 'B', 'C', 'D'],
+      terminals: ['a', 'b', 'd'],
+      productions: [
+        {
+          left: ['S'],
+          right: [['A', 'B']]
+        },
+        {
+          left: ['A'],
+          right: [['B', 'a'], [EMPTY]]
+        },
+        {
+          left: ['B'],
+          right: [['D', 'C']]
+        },
+        {
+          left: ['C'],
+          right: [['b'], [EMPTY]]
+        },
+        {
+          left: ['D'],
+          right: [['d'], [EMPTY]]
+        }
+      ],
+      startSymbol: 'S'
+    };
+    it('FIRST(Ba) = {a, b, d}', () => {
+      expect(getFirstSet(grammar, ['B', 'a'])).to.deep.equal(['a', 'b', 'd']);
+    });
+    it('FIRST(DC) = {b, d, EMPTY}', () => {
+      expect(getFirstSet(grammar, ['D', 'C'])).to.deep.equal(['b', 'd', EMPTY]);
     });
   });
 });

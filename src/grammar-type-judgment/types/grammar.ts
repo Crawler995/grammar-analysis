@@ -12,8 +12,9 @@
  */
 
 /**
- * NonTerminal and Terminal is a character, but there's no 'char' in JS.
- * So use string to declare it, and we must ensure that the length of a NonTerminal or Terminal is 1.
+ * The length of a NonTerminal or Terminal is OFTEN 1 (a single character).
+ * Specially, the length of "A'" is 2.
+ * So use string to define it.
  */
 export type NonTerminal = string;
 export type Terminal = string;
@@ -21,7 +22,7 @@ export type Terminal = string;
 /**
  * EMPTY means 'ε'.
  */
-export const EMPTY = '#';
+export const EMPTY = 'ε';
 
 /**
  * be used in the new symbol in the handler of left recursion.
@@ -42,10 +43,10 @@ export type GSymbol = NonTerminal | Terminal;
  * e.g.
  * A production is 'AB -> ab|BC|ε'.
  *
- * left: [['A', 'B']]
+ * left: ['A', 'B']
  * right: [['a', 'b'], ['B', 'C'], [EMPTY]]
  */
-interface Production {
+export interface Production {
   left: GSymbol[];
   right: GSymbol[][];
 }

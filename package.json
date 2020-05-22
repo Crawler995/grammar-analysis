@@ -20,6 +20,7 @@
     "build": "react-scripts build",
     "format": "prettier --config .prettierrc --write ./{src,test}/**/*.{ts,tsx} --exclude ./src/serviceWorker.ts",
     "test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/**/*.ts'",
+    "spec-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/utils/getInferredGSymbols.test.ts'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
