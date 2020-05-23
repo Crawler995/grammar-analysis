@@ -226,4 +226,60 @@ describe('getLL1AnalysisTable.ts (getLL1AnalysisTable())', () => {
       });
     });
   });
+
+  describe(`S->iCtSS'|a, S'->eS|EMPTY, C->b`, () => {
+    const grammar: Grammar = {
+      nonTerminals: ['S', "S'", 'C'],
+      terminals: ['i', 't', 'a', 'e', 'b'],
+      productions: [
+        {
+          left: ['S'],
+          right: [['i', 'C', 't', 'S', "S'"], ['a']]
+        },
+        {
+          left: ["S'"],
+          right: [['e', 'S'], [EMPTY]]
+        },
+        {
+          left: ['C'],
+          right: [['b']]
+        }
+      ],
+      startSymbol: 'S'
+    };
+
+    it('it is not a LL(1) grammar (multiple definition)', () => {
+      expect(getLL1AnalysisTable(grammar)).to.be.equal(null);
+    });
+  });
+
+  describe('S->AB, A->Ba|EMPTY, B->Db|D, D->d|EMPTY', () => {
+    const grammar: Grammar = {
+      nonTerminals: ['S', 'A', 'B', 'D'],
+      terminals: ['a', 'b', 'd'],
+      productions: [
+        {
+          left: ['S'],
+          right: [['A', 'B']]
+        },
+        {
+          left: ['A'],
+          right: [['B', 'a'], [EMPTY]]
+        },
+        {
+          left: ['B'],
+          right: [['D', 'b'], ['D']]
+        },
+        {
+          left: ['D'],
+          right: [['d'], [EMPTY]]
+        }
+      ],
+      startSymbol: 'S'
+    };
+
+    it('it is not a LL(1) grammar (public left factor)', () => {
+      expect(getLL1AnalysisTable(grammar)).to.be.equal(null);
+    });
+  });
 });

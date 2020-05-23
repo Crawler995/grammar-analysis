@@ -168,4 +168,30 @@ describe('getFollowSet.ts (getFollowSet())', () => {
       expect(getFollowSet(grammar, 'D')).to.deep.equal([END, 'a', 'b']);
     });
   });
+
+  describe(`S->iCtSS'|a, S'->eS|EMPTY, C->b`, () => {
+    const grammar: Grammar = {
+      nonTerminals: ['S', "S'", 'C'],
+      terminals: ['i', 't', 'a', 'e', 'b'],
+      productions: [
+        {
+          left: ['S'],
+          right: [['i', 'C', 't', 'S', "S'"], ['a']]
+        },
+        {
+          left: ["S'"],
+          right: [['e', 'S'], [EMPTY]]
+        },
+        {
+          left: ['C'],
+          right: [['b']]
+        }
+      ],
+      startSymbol: 'S'
+    };
+
+    it(`FOLLOW(S') = {#, e}`, () => {
+      expect(getFollowSet(grammar, "S'")).to.deep.equal([END, 'e']);
+    });
+  });
 });
