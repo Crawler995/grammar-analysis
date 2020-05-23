@@ -30,33 +30,52 @@ const getLL1AnalysisTable = (grammar: Grammar): LL1AnalysisTable | null => {
       const curFirstSet = getFirstSet(grammar, candidate);
       firstSets.push(curFirstSet);
 
+      // there's cross set between first sets
+      // not LL(1) grammar
       if (getIsHasCrossSet(firstSets)) {
         return null;
       }
 
       let isHasEmpty = curFirstSet.includes(EMPTY);
 
-      curFirstSet.forEach(item => {
+      for (let i = 0; i < curFirstSet.length; i++) {
+        const item = curFirstSet[i];
+
         if (item !== EMPTY) {
           const tableColIndex = res.columns.indexOf(item);
+
+          // multiple definition
+          // not LL(1) grammar
+          if (res.relationships[tableRowIndex][tableColIndex] !== null) {
+            return null;
+          }
 
           res.relationships[tableRowIndex][tableColIndex] = {
             left,
             right: [candidate]
           };
         }
-      });
+      }
 
       if (isHasEmpty) {
         const followSet = getFollowSet(grammar, left[0]);
-        followSet.forEach(item => {
+
+        for (let i = 0; i < followSet.length; i++) {
+          const item = followSet[i];
+
           const tableColIndex = res.columns.indexOf(item);
+
+          // multiple definition
+          // not LL(1) grammar
+          if (res.relationships[tableRowIndex][tableColIndex] !== null) {
+            return null;
+          }
 
           res.relationships[tableRowIndex][tableColIndex] = {
             left: left,
             right: [candidate]
           };
-        });
+        }
       }
     }
   }
