@@ -1,4 +1,4 @@
-import { Grammar, GSymbol, EMPTY } from '../types/grammar';
+import { Grammar, GSymbol, EMPTY } from '../../types/grammar';
 
 /**
  * Get whether the given symbols are in non-terminals or terminals in the given grammar.

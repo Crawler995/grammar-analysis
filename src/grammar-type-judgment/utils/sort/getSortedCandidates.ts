@@ -1,4 +1,4 @@
-import { GSymbol } from '../types/grammar';
+import { GSymbol } from '../../types/grammar';
 
 /**
  * get sorted candidates (ascending ASCII order)

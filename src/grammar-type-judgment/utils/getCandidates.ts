@@ -1,5 +1,5 @@
 import { Grammar, GSymbol } from '../types/grammar';
-import getIsGSymbolSetEqual from './getIsGSymbolSetEqual';
+import getIsGSymbolSetEqual from './is/getIsGSymbolSetEqual';
 
 /**
  * Get the inferred symbols (the right) by the given left symbol.

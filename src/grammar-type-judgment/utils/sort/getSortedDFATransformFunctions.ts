@@ -1,4 +1,4 @@
-import { DFA } from '../types/fa';
+import { DFA } from '../../types/fa';
 import { compareDFAStatus } from './getSortedDFAStatuses';
 
 const getSortedDFATransformFunctions = (fns: DFA['transformFunctions']) => {

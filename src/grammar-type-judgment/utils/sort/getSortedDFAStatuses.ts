@@ -1,6 +1,5 @@
 import getSortedNFAStatuses, { compareNFAStatus } from './getSortedNFAStatuses';
-import { DFAStatus } from '../types/fa';
-import deepCopy from '../../utils/deepCopy';
+import { DFAStatus } from '../../types/fa';
 
 const getSortedDFAStatuses = (s: DFAStatus[]) => {
   s = s.map(a => getSortedNFAStatuses(a));

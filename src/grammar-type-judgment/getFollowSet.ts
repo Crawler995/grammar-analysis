@@ -1,5 +1,5 @@
 import { GSymbol, Grammar, NonTerminal, EMPTY, END, Terminal } from './types/grammar';
-import getIsArgumentInGrammar from './utils/getIsArgumentInGrammar';
+import getIsArgumentInGrammar from './utils/is/getIsArgumentInGrammar';
 import getFirstSet from './getFirstSet';
 
 const getFollowSet = (

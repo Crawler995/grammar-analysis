@@ -1,7 +1,7 @@
-import { NFA, NFAStatus } from '../types/fa';
-import deepEqual from '../../utils/deepEqual';
-import { EMPTY } from '../types/grammar';
-import deepCopy from '../../utils/deepCopy';
+import { NFA, NFAStatus } from '../../types/fa';
+import deepEqual from '../../../utils/deepEqual';
+import { EMPTY } from '../../types/grammar';
+import deepCopy from '../../../utils/deepCopy';
 
 const getEmptyArcClosure = (inputNFA: NFA, statuses: NFAStatus[]): NFAStatus[] => {
   const { transformFunctions } = inputNFA;

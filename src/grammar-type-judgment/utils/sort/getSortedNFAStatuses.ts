@@ -1,4 +1,4 @@
-import { NFAStatus } from '../types/fa';
+import { NFAStatus } from '../../types/fa';
 
 const getSortedNFAStatuses = (s: NFAStatus[]) => {
   return s.sort((s1, s2) => compareNFAStatus(s1, s2));

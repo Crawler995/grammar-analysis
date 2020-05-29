@@ -1,6 +1,6 @@
-import { Grammar, EMPTY } from '../types/grammar';
-import { NFAStatus, NFA } from '../types/fa';
-import getCandidates from './getCandidates';
+import { Grammar, EMPTY } from '../../types/grammar';
+import { NFAStatus, NFA } from '../../types/fa';
+import getCandidates from '../getCandidates';
 
 const getNFAFromGrammar = (grammar: Grammar) => {
   const resNFA: NFA = {

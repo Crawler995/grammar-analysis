@@ -2,8 +2,8 @@ import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
 import { Grammar } from '../../../src/grammar-type-judgment/types/grammar';
-import getEmptyArcClosure from '../../../src/grammar-type-judgment/utils/getEmptyArcClosure';
-import { getNFAFromGrammar } from '../../../src/grammar-type-judgment/getLR0SimplifiedDFA';
+import getEmptyArcClosure from '../../../src/grammar-type-judgment/utils/closure/getEmptyArcClosure';
+import getNFAFromGrammar from '../../../src/grammar-type-judgment/utils/fa/getNFAFromGrammar';
 
 describe('getEmptyArcClosure.ts (getEmptyArcClosure())', () => {
   describe(`S'->A, A->aA|b`, () => {

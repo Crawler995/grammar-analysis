@@ -1,8 +1,8 @@
-import { NFAStatus, NFA } from '../types/fa';
+import { NFAStatus, NFA } from '../../types/fa';
 import getEmptyArcClosure from './getEmptyArcClosure';
-import deepCopy from '../../utils/deepCopy';
-import { GSymbol } from '../types/grammar';
-import deepEqual from '../../utils/deepEqual';
+import deepCopy from '../../../utils/deepCopy';
+import { GSymbol } from '../../types/grammar';
+import deepEqual from '../../../utils/deepEqual';
 
 const getAlphaArcClosure = (inputNFA: NFA, statuses: NFAStatus[], alpha: GSymbol): NFAStatus[] => {
   const emptyArcClosure = getEmptyArcClosure(inputNFA, statuses);

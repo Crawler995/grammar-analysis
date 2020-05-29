@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import getIsCanInferEmpty from '../../../src/grammar-type-judgment/utils/getIsCanInferEmpty';
+import getIsCanInferEmpty from '../../../src/grammar-type-judgment/utils/is/getIsCanInferEmpty';
 import { EMPTY, Grammar } from '../../../src/grammar-type-judgment/types/grammar';
 
 describe('getInferredGSymbols.ts (getInferredGSymbols())', () => {

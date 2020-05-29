@@ -1,4 +1,4 @@
-import { GSymbol } from '../types/grammar';
+import { GSymbol } from '../../types/grammar';
 
 /**
  * Get whether two symbols are deeply equal.

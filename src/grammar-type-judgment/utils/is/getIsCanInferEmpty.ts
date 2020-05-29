@@ -1,6 +1,6 @@
-import { Grammar, GSymbol, NonTerminal, EMPTY } from '../types/grammar';
-import getCandidates from './getCandidates';
-import getCrossSet from './getCrossSet';
+import { Grammar, GSymbol, NonTerminal, EMPTY } from '../../types/grammar';
+import getCandidates from '../getCandidates';
+import getCrossSet from '../getCrossSet';
 
 /**
  * Assert that the given grammar is a two grammar.

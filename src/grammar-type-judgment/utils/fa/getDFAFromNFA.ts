@@ -1,9 +1,9 @@
-import { NFA, NFAStatus, DFA, DFAStatus } from '../types/fa';
-import getEmptyArcClosure from './getEmptyArcClosure';
-import { GSymbol, EMPTY } from '../types/grammar';
-import getAlphaArcClosure from './getAlphaArcClosure';
-import deepEqual from '../../utils/deepEqual';
-import getSortedNFAStatuses from './getSortedNFAStatuses';
+import { NFA, NFAStatus, DFA, DFAStatus } from '../../types/fa';
+import getEmptyArcClosure from '../closure/getEmptyArcClosure';
+import { GSymbol, EMPTY } from '../../types/grammar';
+import getAlphaArcClosure from '../closure/getAlphaArcClosure';
+import deepEqual from '../../../utils/deepEqual';
+import getSortedNFAStatuses from '../sort/getSortedNFAStatuses';
 
 interface DeterminingTable {
   rows: NFAStatus[][];

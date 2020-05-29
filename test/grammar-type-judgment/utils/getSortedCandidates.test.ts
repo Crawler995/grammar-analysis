@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import getSortedCandidates from '../../../src/grammar-type-judgment/utils/getSortedCandidates';
+import getSortedCandidates from '../../../src/grammar-type-judgment/utils/sort/getSortedCandidates';
 
 describe('getSortedCandidates.ts (getSortedCandidates())', () => {
   it(`[['I','a'], ['I','b'], ['a'], ['I','0']], ['b'] should be [['I','0'], ['I','a'], ['I','b'], ['a'], ['b']]`, () => {

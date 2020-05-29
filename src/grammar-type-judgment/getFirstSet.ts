@@ -1,7 +1,7 @@
 import { Grammar, GSymbol, EMPTY, NonTerminal } from './types/grammar';
 import getCandidates from './utils/getCandidates';
-import getIsArgumentInGrammar from './utils/getIsArgumentInGrammar';
-import getIsCanInferEmpty from './utils/getIsCanInferEmpty';
+import getIsArgumentInGrammar from './utils/is/getIsArgumentInGrammar';
+import getIsCanInferEmpty from './utils/is/getIsCanInferEmpty';
 
 /**
  * Get FIRST(*).
