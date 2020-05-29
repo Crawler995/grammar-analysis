@@ -16,11 +16,11 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
+    "all-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/**/*.ts'",
+    "LL1-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/getLL1AnalysisTable.test.ts'",
+    "spec-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/utils/getDFAFromNFA.test.ts'",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "format": "prettier --config .prettierrc --write ./{src,test}/**/*.{ts,tsx} --exclude ./src/serviceWorker.ts",
-    "test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/**/*.ts'",
-    "spec-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/utils/getInferredGSymbols.test.ts'",
+    "format": "prettier --config .prettierrc --write ./{src,test}/**/*.{ts,tsx}",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

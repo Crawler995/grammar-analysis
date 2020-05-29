@@ -1,4 +1,4 @@
-import { GSymbol, NonTerminal } from "./grammar";
+import { GSymbol, NonTerminal } from './grammar';
 
 /**
  * NFA in LR(0) / SLR(1) analysis
@@ -12,7 +12,7 @@ export interface NFA {
     from: NFAStatus;
     input: GSymbol;
     to: NFAStatus;
-  }
+  }[];
 }
 
 /**
@@ -47,5 +47,5 @@ export interface DFA {
     from: NFAStatus[];
     input: GSymbol;
     to: NFAStatus[];
-  }
+  }[];
 }
