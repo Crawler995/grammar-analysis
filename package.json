@@ -18,7 +18,8 @@
   "scripts": {
     "all-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/**/*.ts'",
     "LL1-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/getLL1AnalysisTable.test.ts'",
-    "spec-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/utils/getDFAFromNFA.test.ts'",
+    "LR0-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/getLR0AnalysisTable.test.ts'",
+    "SLR1-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-type-judgment/getSLR1AnalysisTable.test.ts'",
     "start": "react-scripts start",
     "format": "prettier --config .prettierrc --write ./{src,test}/**/*.{ts,tsx}",
     "eject": "react-scripts eject"

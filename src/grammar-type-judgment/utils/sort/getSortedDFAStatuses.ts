@@ -4,7 +4,7 @@ import { DFAStatus } from '../../types/fa';
 const getSortedDFAStatuses = (s: DFAStatus[]) => {
   s = s.map(a => getSortedNFAStatuses(a));
 
-  return s.sort((a, b) => compareDFAStatus(a, b));
+  return s.slice(0).sort((a, b) => compareDFAStatus(a, b));
 };
 
 export const compareDFAStatus = (a: DFAStatus, b: DFAStatus) => {

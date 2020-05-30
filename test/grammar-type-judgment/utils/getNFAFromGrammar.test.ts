@@ -5,7 +5,7 @@ import { Grammar, EMPTY } from '../../../src/grammar-type-judgment/types/grammar
 import getNFAFromGrammar from '../../../src/grammar-type-judgment/utils/fa/getNFAFromGrammar';
 import { NFA, NFAStatus } from '../../../src/grammar-type-judgment/types/fa';
 
-describe('getNFAFromGrammar.ts getNFAFromGrammar()', () => {
+describe('getNFAFromGrammar.ts (getNFAFromGrammar())', () => {
   describe(`S'->A, A->aA|b`, () => {
     const grammar: Grammar = {
       nonTerminals: ["S'", 'A'],

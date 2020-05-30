@@ -18,8 +18,8 @@ const getIsGSymbolSetEqual = (a: GSymbol[], b: GSymbol[], sorted: boolean = true
   }
 
   if (sorted) {
-    a = a.sort();
-    b = b.sort();
+    a = a.slice(0).sort();
+    b = b.slice(0).sort();
   }
 
   for (let i = 0; i < a.length; i++) {

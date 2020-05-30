@@ -2,7 +2,7 @@ import { DFA } from '../../types/fa';
 import { compareDFAStatus } from './getSortedDFAStatuses';
 
 const getSortedDFATransformFunctions = (fns: DFA['transformFunctions']) => {
-  return fns.sort((a, b) => {
+  return fns.slice(0).sort((a, b) => {
     const fromR = compareDFAStatus(a.from, b.from);
     if (fromR !== 0) {
       return fromR;

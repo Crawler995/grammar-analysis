@@ -17,3 +17,18 @@ export interface LL1AnalysisTable {
   columns: (Terminal | typeof END)[];
   relationships: (Production | null)[][];
 }
+
+export type State = number;
+export const S = (n: State) => `S${n}`;
+export const R = (n: State) => `R${n}`;
+export const ACC = `acc`;
+
+export interface LR0AnalysisTable {
+  states: State[];
+  actionColumns: (Terminal | typeof END)[];
+  gotoColumns: NonTerminal[];
+  actionTable: (ReturnType<typeof S> | ReturnType<typeof R> | typeof ACC | null)[][];
+  gotoTable: (State | null)[][];
+}
+
+export type SLR1AnalysisTable = LR0AnalysisTable;
