@@ -91,8 +91,8 @@ const getLR0AnalysisTable = (grammar: Grammar): LR0AnalysisTable | null => {
               const candidate = production.right[j];
 
               if (
-                candidate.slice(0).sort().join('') ===
-                reduceProject[0].right.slice(0).sort().join('')
+                candidate.join('') ===
+                reduceProject[0].right.join('')
               ) {
                 // fill the row with rj
                 for (let k = 0; k < resTable.actionColumns.length; k++) {

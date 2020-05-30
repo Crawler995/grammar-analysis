@@ -92,8 +92,8 @@ const getSLR1AnalysisTable = (grammar: Grammar): SLR1AnalysisTable | null => {
               const candidate = production.right[j];
 
               if (
-                candidate.slice(0).sort().join('') ===
-                reduceProject[0].right.slice(0).sort().join('')
+                candidate.join('') ===
+                reduceProject[0].right.join('')
               ) {
                 // get FOLLOW set
                 // the only difference between LR(0) and SLR(1)
