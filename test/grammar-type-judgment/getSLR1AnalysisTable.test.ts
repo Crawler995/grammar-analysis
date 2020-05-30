@@ -45,24 +45,29 @@ describe('getSLR1AnalysisTable.ts (getSLR1AnalysisTable())', () => {
     const grammar: Grammar = {
       nonTerminals: ["S'", 'S', 'L', 'R'],
       terminals: ['=', '*', 'i'],
-      productions: [{
-        left: ["S'"],
-        right: [['S']]
-      }, {
-        left: ['S'],
-        right: [['L', '=', 'R'], ['R']]
-      }, {
-        left: ['L'],
-        right: [['*', 'R'], ['i']]
-      }, {
-        left: ['R'],
-        right: [['L']]
-      }],
+      productions: [
+        {
+          left: ["S'"],
+          right: [['S']]
+        },
+        {
+          left: ['S'],
+          right: [['L', '=', 'R'], ['R']]
+        },
+        {
+          left: ['L'],
+          right: [['*', 'R'], ['i']]
+        },
+        {
+          left: ['R'],
+          right: [['L']]
+        }
+      ],
       startSymbol: "S'"
     };
 
     it('it is not a SLR(1) grammar (shift-reduce conflict)', () => {
       expect(getSLR1AnalysisTable(grammar)).to.be.equal(null);
     });
-  })
+  });
 });
