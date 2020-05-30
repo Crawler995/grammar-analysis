@@ -1,8 +1,8 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import getIsCanInferEmpty from '../../../src/grammar-type-judgment/utils/is/getIsCanInferEmpty';
-import { EMPTY, Grammar } from '../../../src/grammar-type-judgment/types/grammar';
+import getIsCanInferEmpty from '../../../src/grammar-analysis/utils/is/getIsCanInferEmpty';
+import { EMPTY, Grammar } from '../../../src/grammar-analysis/types/grammar';
 
 describe('getInferredGSymbols.ts (getInferredGSymbols())', () => {
   describe('S->aABbcd|EMPTY, A->ASd|EMPTY, B->eC|SAh|EMPTY, C->Sf|Cg|EMPTY (direct left recursion)', () => {

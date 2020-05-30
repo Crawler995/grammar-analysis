@@ -1,9 +1,9 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import { Grammar, END } from '../../src/grammar-type-judgment/types/grammar';
-import getLR0AnalysisTable from '../../src/grammar-type-judgment/getLR0AnalysisTable';
-import { LR0AnalysisTable, S, ACC, R } from '../../src/grammar-type-judgment/types/analysisTable';
+import { Grammar, END } from '../../src/grammar-analysis/types/grammar';
+import getLR0AnalysisTable from '../../src/grammar-analysis/getLR0AnalysisTable';
+import { LR0AnalysisTable, S, ACC, R } from '../../src/grammar-analysis/types/analysisTable';
 
 describe('getLR0AnalysisTable.ts (getLR0AnalysisTable())', () => {
   describe(`S'->A, A->aA|b`, () => {

@@ -1,8 +1,8 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import { Grammar, EMPTY, Production, END } from '../../src/grammar-type-judgment/types/grammar';
-import getLL1AnalysisTable from '../../src/grammar-type-judgment/getLL1AnalysisTable';
+import { Grammar, EMPTY, Production, END } from '../../src/grammar-analysis/types/grammar';
+import getLL1AnalysisTable from '../../src/grammar-analysis/getLL1AnalysisTable';
 
 describe('getLL1AnalysisTable.ts (getLL1AnalysisTable())', () => {
   describe(`E->TE', E'->+TE'|EMPTY, T->FT', T'->*FT'|EMPTY, F->(E)|i`, () => {

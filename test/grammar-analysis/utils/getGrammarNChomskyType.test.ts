@@ -1,13 +1,13 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import { Grammar, EMPTY } from '../../../src/grammar-type-judgment/types/grammar';
+import { Grammar, EMPTY } from '../../../src/grammar-analysis/types/grammar';
 import getGrammarNChomskyType, {
   getCandidateLinearType,
   getIsThreeGrammar,
   getIsTwoGrammar
-} from '../../../src/grammar-type-judgment/utils/getGrammarNChomskyType';
-import GrammarNChomskyType from '../../../src/grammar-type-judgment/types/grammarNChomskyType';
+} from '../../../src/grammar-analysis/utils/getGrammarNChomskyType';
+import GrammarNChomskyType from '../../../src/grammar-analysis/types/grammarNChomskyType';
 
 describe('getGrammarNChomskyType.ts', () => {
   describe('getCandidateLinearType()', () => {

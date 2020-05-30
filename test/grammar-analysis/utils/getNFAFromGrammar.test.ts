@@ -1,9 +1,9 @@
 import { describe } from 'mocha';
 import { expect } from 'chai';
 
-import { Grammar, EMPTY } from '../../../src/grammar-type-judgment/types/grammar';
-import getNFAFromGrammar from '../../../src/grammar-type-judgment/utils/fa/getNFAFromGrammar';
-import { NFA, NFAStatus } from '../../../src/grammar-type-judgment/types/fa';
+import { Grammar, EMPTY } from '../../../src/grammar-analysis/types/grammar';
+import getNFAFromGrammar from '../../../src/grammar-analysis/utils/fa/getNFAFromGrammar';
+import { NFA, NFAStatus } from '../../../src/grammar-analysis/types/fa';
 
 describe('getNFAFromGrammar.ts (getNFAFromGrammar())', () => {
   describe(`S'->A, A->aA|b`, () => {

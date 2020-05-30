@@ -2,10 +2,10 @@ import { describe, it, before, after } from 'mocha';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 
-import { Grammar, EMPTY } from '../../src/grammar-type-judgment/types/grammar';
-import getFirstSet from '../../src/grammar-type-judgment/getFirstSet';
+import { Grammar, EMPTY, END } from '../../src/grammar-analysis/types/grammar';
+import getFollowSet from '../../src/grammar-analysis/getFollowSet';
 
-describe('getFirstSet.ts (getFirstSet())', () => {
+describe('getFollowSet.ts (getFollowSet())', () => {
   let consoleStub;
   before(() => {
     consoleStub = sinon.stub(console, 'log');
@@ -38,28 +38,16 @@ describe('getFirstSet.ts (getFirstSet())', () => {
       startSymbol: 'S'
     };
 
-    it('FIRST(Ap) = {a, c}', () => {
-      expect(getFirstSet(grammar, ['A', 'p'])).to.deep.equal(['a', 'c']);
+    it('FOLLOW(S) = {#}', () => {
+      expect(getFollowSet(grammar, 'S')).to.deep.equal([END]);
     });
 
-    it('FIRST(Bq) = {b, d}', () => {
-      expect(getFirstSet(grammar, ['B', 'q'])).to.deep.equal(['b', 'd']);
+    it('FOLLOW(A) = {p}', () => {
+      expect(getFollowSet(grammar, 'A')).to.deep.equal(['p']);
     });
 
-    it('FIRST(a) = {a}', () => {
-      expect(getFirstSet(grammar, ['a'])).to.deep.equal(['a']);
-    });
-
-    it('FIRST(cA) = {c}', () => {
-      expect(getFirstSet(grammar, ['c', 'A'])).to.deep.equal(['c']);
-    });
-
-    it('FIRST(b) = {b}', () => {
-      expect(getFirstSet(grammar, ['b'])).to.deep.equal(['b']);
-    });
-
-    it('FIRST(dB) = {d}', () => {
-      expect(getFirstSet(grammar, ['d', 'B'])).to.deep.equal(['d']);
+    it('FOLLOW(B) = {q}', () => {
+      expect(getFollowSet(grammar, 'B')).to.deep.equal(['q']);
     });
   });
 
@@ -88,14 +76,20 @@ describe('getFirstSet.ts (getFirstSet())', () => {
       startSymbol: 'S'
     };
 
-    it('FIRST(A) = {a, d, EMPTY}', () => {
-      expect(getFirstSet(grammar, ['A'])).to.deep.equal(['a', 'd', EMPTY]);
+    it('FOLLOW(S) = {#, a, d, f, h}', () => {
+      expect(getFollowSet(grammar, 'S')).to.deep.equal([END, 'a', 'd', 'f', 'h']);
     });
-    it('FIRST(S) = {a, EMPTY}', () => {
-      expect(getFirstSet(grammar, ['S'])).to.deep.equal(['a', EMPTY]);
+
+    it('FOLLOW(A) = {a, b, d, e, h}', () => {
+      expect(getFollowSet(grammar, 'A')).to.deep.equal(['a', 'b', 'd', 'e', 'h']);
     });
-    it('FIRST(B) = {a, d, e, h, EMPTY}', () => {
-      expect(getFirstSet(grammar, ['B'])).to.deep.equal(['a', 'd', 'e', 'h', EMPTY]);
+
+    it('FOLLOW(B) = {b}', () => {
+      expect(getFollowSet(grammar, 'B')).to.deep.equal(['b']);
+    });
+
+    it('FOLLOW(C) = {b, g}', () => {
+      expect(getFollowSet(grammar, 'C')).to.deep.equal(['b', 'g']);
     });
   });
 
@@ -116,11 +110,12 @@ describe('getFirstSet.ts (getFirstSet())', () => {
       startSymbol: 'S'
     };
 
-    it('FIRST(S) = {a, b, EMPTY}', () => {
-      expect(getFirstSet(grammar, ['S'])).to.deep.equal(['a', 'b', EMPTY]);
+    it('FOLLOW(S) = {#, b}', () => {
+      expect(getFollowSet(grammar, 'S')).to.deep.equal([END, 'b']);
     });
-    it('FIRST(A) = {a, b, EMPTY}', () => {
-      expect(getFirstSet(grammar, ['A'])).to.deep.equal(['a', 'b', EMPTY]);
+
+    it('FOLLOW(A) = {a}', () => {
+      expect(getFollowSet(grammar, 'A')).to.deep.equal(['a']);
     });
   });
 
@@ -152,45 +147,51 @@ describe('getFirstSet.ts (getFirstSet())', () => {
       ],
       startSymbol: 'S'
     };
-    it('FIRST(Ba) = {a, b, d}', () => {
-      expect(getFirstSet(grammar, ['B', 'a'])).to.deep.equal(['a', 'b', 'd']);
+
+    it('FOLLOW(S) = {#}', () => {
+      expect(getFollowSet(grammar, 'S')).to.deep.equal([END]);
     });
-    it('FIRST(DC) = {b, d, EMPTY}', () => {
-      expect(getFirstSet(grammar, ['D', 'C'])).to.deep.equal(['b', 'd', EMPTY]);
+
+    it('FOLLOW(A) = {#, b, d}', () => {
+      expect(getFollowSet(grammar, 'A')).to.deep.equal([END, 'b', 'd']);
+    });
+
+    it('FOLLOW(B) = {#, a}', () => {
+      expect(getFollowSet(grammar, 'B')).to.deep.equal([END, 'a']);
+    });
+
+    it('FOLLOW(C) = {#, a}', () => {
+      expect(getFollowSet(grammar, 'C')).to.deep.equal([END, 'a']);
+    });
+
+    it('FOLLOW(D) = {#, a, b}', () => {
+      expect(getFollowSet(grammar, 'D')).to.deep.equal([END, 'a', 'b']);
     });
   });
 
-  describe(`E->TE', E'->+TE'|EMPTY, T->FT', T'->*FT'|EMPTY, F->(E)|i`, () => {
+  describe(`S->iCtSS'|a, S'->eS|EMPTY, C->b`, () => {
     const grammar: Grammar = {
-      nonTerminals: ['E', "E'", 'T', "T'", 'F'],
-      terminals: ['+', '*', '(', ')', 'i'],
+      nonTerminals: ['S', "S'", 'C'],
+      terminals: ['i', 't', 'a', 'e', 'b'],
       productions: [
         {
-          left: ['E'],
-          right: [['T', "E'"]]
+          left: ['S'],
+          right: [['i', 'C', 't', 'S', "S'"], ['a']]
         },
         {
-          left: ["E'"],
-          right: [['+', 'T', "E'"], [EMPTY]]
+          left: ["S'"],
+          right: [['e', 'S'], [EMPTY]]
         },
         {
-          left: ['T'],
-          right: [['F', "T'"]]
-        },
-        {
-          left: ["T'"],
-          right: [['*', 'F', "T'"], [EMPTY]]
-        },
-        {
-          left: ['F'],
-          right: [['(', 'E', ')'], ['i']]
+          left: ['C'],
+          right: [['b']]
         }
       ],
-      startSymbol: 'E'
+      startSymbol: 'S'
     };
 
-    it(`FIRST(TE') = {(, i}`, () => {
-      expect(getFirstSet(grammar, ['T', "E'"])).to.deep.equal(['(', 'i']);
+    it(`FOLLOW(S') = {#, e}`, () => {
+      expect(getFollowSet(grammar, "S'")).to.deep.equal([END, 'e']);
     });
   });
 });

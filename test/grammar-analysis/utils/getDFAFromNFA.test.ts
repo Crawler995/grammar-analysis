@@ -1,13 +1,13 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import { Grammar } from '../../../src/grammar-type-judgment/types/grammar';
-import getNFAFromGrammar from '../../../src/grammar-type-judgment/utils/fa/getNFAFromGrammar';
-import getDFAFromNFA from '../../../src/grammar-type-judgment/utils/fa/getDFAFromNFA';
-import { DFA, NFAStatus, DFAStatus } from '../../../src/grammar-type-judgment/types/fa';
-import getSortedNFAStatuses from '../../../src/grammar-type-judgment/utils/sort/getSortedNFAStatuses';
-import getSortedDFAStatuses from '../../../src/grammar-type-judgment/utils/sort/getSortedDFAStatuses';
-import getSortedDFATransformFunctions from '../../../src/grammar-type-judgment/utils/sort/getSortedDFATransformFunctions';
+import { Grammar } from '../../../src/grammar-analysis/types/grammar';
+import getNFAFromGrammar from '../../../src/grammar-analysis/utils/fa/getNFAFromGrammar';
+import getDFAFromNFA from '../../../src/grammar-analysis/utils/fa/getDFAFromNFA';
+import { DFA, NFAStatus, DFAStatus } from '../../../src/grammar-analysis/types/fa';
+import getSortedNFAStatuses from '../../../src/grammar-analysis/utils/sort/getSortedNFAStatuses';
+import getSortedDFAStatuses from '../../../src/grammar-analysis/utils/sort/getSortedDFAStatuses';
+import getSortedDFATransformFunctions from '../../../src/grammar-analysis/utils/sort/getSortedDFATransformFunctions';
 
 describe('getDFAFromNFA.ts (getDFAFromNFA())', () => {
   describe(`S'->A, A->aA|b`, () => {
