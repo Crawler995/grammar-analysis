@@ -5,8 +5,14 @@ import getDFAFromNFA from './utils/fa/getDFAFromNFA';
 import getSortedNFAStatuses from './utils/sort/getSortedNFAStatuses';
 import deepEqual from '../utils/deepEqual';
 import getFollowSet from './getFollowSet';
+import getGrammarNChomskyType from './utils/getGrammarNChomskyType';
+import GrammarNChomskyType from './types/grammarNChomskyType';
 
 const getSLR1AnalysisTable = (grammar: Grammar): SLR1AnalysisTable | null => {
+  if (getGrammarNChomskyType(grammar) === GrammarNChomskyType.OTHER) {
+    throw new Error('you should give a two grammar at least.');
+  }
+
   const depNFA = getNFAFromGrammar(grammar);
   const depDFA = getDFAFromNFA(depNFA);
 
@@ -91,10 +97,7 @@ const getSLR1AnalysisTable = (grammar: Grammar): SLR1AnalysisTable | null => {
             for (let j = 0; j < production.right.length; j++) {
               const candidate = production.right[j];
 
-              if (
-                candidate.join('') ===
-                reduceProject[0].right.join('')
-              ) {
+              if (candidate.join('') === reduceProject[0].right.join('')) {
                 // get FOLLOW set
                 // the only difference between LR(0) and SLR(1)
                 const followSet = getFollowSet(grammar, production.left[0]);

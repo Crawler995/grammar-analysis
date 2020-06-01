@@ -4,8 +4,14 @@ import getNFAFromGrammar from './utils/fa/getNFAFromGrammar';
 import getDFAFromNFA from './utils/fa/getDFAFromNFA';
 import getSortedNFAStatuses from './utils/sort/getSortedNFAStatuses';
 import deepEqual from '../utils/deepEqual';
+import getGrammarNChomskyType from './utils/getGrammarNChomskyType';
+import GrammarNChomskyType from './types/grammarNChomskyType';
 
 const getLR0AnalysisTable = (grammar: Grammar): LR0AnalysisTable | null => {
+  if (getGrammarNChomskyType(grammar) === GrammarNChomskyType.OTHER) {
+    throw new Error('you should give a two grammar at least.');
+  }
+
   const depNFA = getNFAFromGrammar(grammar);
   const depDFA = getDFAFromNFA(depNFA);
 
@@ -90,10 +96,7 @@ const getLR0AnalysisTable = (grammar: Grammar): LR0AnalysisTable | null => {
             for (let j = 0; j < production.right.length; j++) {
               const candidate = production.right[j];
 
-              if (
-                candidate.join('') ===
-                reduceProject[0].right.join('')
-              ) {
+              if (candidate.join('') === reduceProject[0].right.join('')) {
                 // fill the row with rj
                 for (let k = 0; k < resTable.actionColumns.length; k++) {
                   // conflict

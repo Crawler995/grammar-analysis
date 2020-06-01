@@ -3,8 +3,14 @@ import getFirstSet from './getFirstSet';
 import getCrossSet from './utils/getCrossSet';
 import { LL1AnalysisTable } from './types/analysisTable';
 import getFollowSet from './getFollowSet';
+import getGrammarNChomskyType from './utils/getGrammarNChomskyType';
+import GrammarNChomskyType from './types/grammarNChomskyType';
 
 const getLL1AnalysisTable = (grammar: Grammar): LL1AnalysisTable | null => {
+  if (getGrammarNChomskyType(grammar) === GrammarNChomskyType.OTHER) {
+    throw new Error('you should give a two grammar at least.');
+  }
+
   const res: LL1AnalysisTable = {
     rows: [...grammar.nonTerminals],
     columns: [...grammar.terminals, END],
