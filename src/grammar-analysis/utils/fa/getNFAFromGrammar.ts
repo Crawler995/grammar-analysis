@@ -21,7 +21,7 @@ const getNFAFromGrammar = (grammar: Grammar) => {
     right.forEach(candidate => {
       for (let i = 0; i < candidate.length; i++) {
         // A->EMPTY => A->·
-        if(candidate.length === 1 && candidate[0] === EMPTY) {
+        if (candidate.length === 1 && candidate[0] === EMPTY) {
           const emptyStatus: NFAStatus = {
             left: left[0],
             right: [],
@@ -29,7 +29,7 @@ const getNFAFromGrammar = (grammar: Grammar) => {
           };
           resNFA.statuses.push(emptyStatus);
           resNFA.acceptedStatuses.push(emptyStatus);
-          
+
           break;
         }
 
