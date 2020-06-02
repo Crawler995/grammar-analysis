@@ -1,1 +1,17 @@
 @import '~antd/dist/antd.css';
+
+.custom-table {
+  border: solid #ececec;
+  border-width: 1px 0px 0px 1px;
+}
+
+.custom-table td {
+  border: solid #ececec;
+  border-width: 0px 1px 1px 0px;
+
+  text-align: center;
+}
+
+.custom-table .custom-table-header {
+  background-color: #fafafa;
+}

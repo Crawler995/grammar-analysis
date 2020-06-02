@@ -13,7 +13,7 @@ export default function Header() {
       </Descriptions>
 
       <Paragraph>
-        This is the final assignment of class <b>Compilation principle</b> taught by Peng Li, BIT.
+        This is the final assignment of class <b>Compilation Principle</b> taught by Peng Li, BIT.
       </Paragraph>
       <Paragraph>
         This can compute <b>FIRST(), FOLLOW(), LL(1) / LR(0) / SLR(1) Analysis Table</b> according
