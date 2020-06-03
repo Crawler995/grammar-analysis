@@ -21,7 +21,8 @@ const getSLR1AnalysisTable = (grammar: Grammar): SLR1AnalysisTable | null => {
     actionColumns: [...grammar.terminals, END],
     gotoColumns: [...grammar.nonTerminals.filter(t => t !== grammar.startSymbol)],
     actionTable: [],
-    gotoTable: []
+    gotoTable: [],
+    depDFA
   };
 
   resTable.actionTable = new Array(resTable.states.length);

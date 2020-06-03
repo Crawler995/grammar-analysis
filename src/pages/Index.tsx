@@ -6,6 +6,7 @@ import { Divider } from 'antd';
 import { Grammar } from '../grammar-analysis/types/grammar';
 import FirstAndFollowSetCompute from '../components/FirstAndFollowSetCompute';
 import LL1AnalysisTableCompute from '../components/LL1AnalysisTableCompute';
+import LR0AnalysisTableCompute from '../components/LR0AnalysisTableCompute';
 
 interface IState {
   grammar: Grammar;
@@ -51,6 +52,8 @@ export default class Index extends React.Component<{}, IState> {
           <FirstAndFollowSetCompute grammar={this.state.grammar} />
 
           <LL1AnalysisTableCompute grammar={this.state.grammar} />
+
+          <LR0AnalysisTableCompute grammar={this.state.grammar} />
         </main>
       </div>
     );

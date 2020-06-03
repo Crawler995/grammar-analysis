@@ -4,6 +4,8 @@ import { expect } from 'chai';
 import { Grammar, END } from '../../src/grammar-analysis/types/grammar';
 import getSLR1AnalysisTable from '../../src/grammar-analysis/getSLR1AnalysisTable';
 import { SLR1AnalysisTable, S, ACC, R } from '../../src/grammar-analysis/types/analysisTable';
+import getDFAFromNFA from '../../src/grammar-analysis/utils/fa/getDFAFromNFA';
+import getNFAFromGrammar from '../../src/grammar-analysis/utils/fa/getNFAFromGrammar';
 
 describe('getSLR1AnalysisTable.ts (getSLR1AnalysisTable())', () => {
   describe(`S'->A, A->aA|a`, () => {
@@ -34,7 +36,8 @@ describe('getSLR1AnalysisTable.ts (getSLR1AnalysisTable())', () => {
           [S(2), R(2)],
           [null, R(1)]
         ],
-        gotoTable: [[1], [null], [3], [null]]
+        gotoTable: [[1], [null], [3], [null]],
+        depDFA: getDFAFromNFA(getNFAFromGrammar(grammar))
       };
 
       expect(getSLR1AnalysisTable(grammar)).to.deep.equal(expectTable);

@@ -1,4 +1,5 @@
 import { NonTerminal, Terminal, END, Production } from './grammar';
+import { DFA } from './fa';
 
 /**
  * e.g.
@@ -29,6 +30,7 @@ export interface LR0AnalysisTable {
   gotoColumns: NonTerminal[];
   actionTable: (ReturnType<typeof S> | ReturnType<typeof R> | typeof ACC | null)[][];
   gotoTable: (State | null)[][];
+  depDFA: DFA;
 }
 
 export type SLR1AnalysisTable = LR0AnalysisTable;
