@@ -14,7 +14,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "vis-data": "^6.5.3",
+    "vis-network": "^7.6.9",
+    "vis-util": "^4.0.2"
   },
   "scripts": {
     "all-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/**/*.ts'",
