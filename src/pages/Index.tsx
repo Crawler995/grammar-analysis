@@ -1,16 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
-import AnalysisSteps from '../components/AnalysisSteps';
 import GrammarInput from '../components/GrammarInput';
 import { Divider } from 'antd';
 import { Grammar } from '../grammar-analysis/types/grammar';
 import FirstAndFollowSetCompute from '../components/FirstAndFollowSetCompute';
 import LL1AnalysisTableCompute from '../components/LL1AnalysisTableCompute';
 import LR0AnalysisTableCompute from '../components/LR0AnalysisTableCompute';
+import SLR1AnalysisTableCompute from '../components/SLR1AnalysisTableCompute';
 
 interface IState {
   grammar: Grammar;
-  currentStepIndex: number;
 }
 
 /**
@@ -25,13 +24,12 @@ export default class Index extends React.Component<{}, IState> {
       terminals: [],
       productions: [],
       startSymbol: ''
-    },
-    currentStepIndex: 0
+    }
   };
 
   startComputeHandler = (grammar: Grammar) => {
     console.log(grammar);
-    this.setState({ grammar, currentStepIndex: 2 });
+    this.setState({ grammar });
   };
 
   render() {
@@ -45,15 +43,23 @@ export default class Index extends React.Component<{}, IState> {
             padding: '0px 100px'
           }}
         >
-          <AnalysisSteps currentIndex={this.state.currentStepIndex} />
-
           <GrammarInput onStartCompute={this.startComputeHandler} />
 
-          <FirstAndFollowSetCompute grammar={this.state.grammar} />
+          <FirstAndFollowSetCompute
+            grammar={this.state.grammar}
+          />
 
-          <LL1AnalysisTableCompute grammar={this.state.grammar} />
+          <LL1AnalysisTableCompute 
+            grammar={this.state.grammar}
+          />
 
-          <LR0AnalysisTableCompute grammar={this.state.grammar} />
+          <LR0AnalysisTableCompute
+            grammar={this.state.grammar}
+          />
+
+          <SLR1AnalysisTableCompute
+            grammar={this.state.grammar}
+          />
         </main>
       </div>
     );

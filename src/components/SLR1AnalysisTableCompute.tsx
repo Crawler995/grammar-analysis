@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Card, Typography, Col, Row } from 'antd';
 import { Grammar } from '../grammar-analysis/types/grammar';
-import getLR0AnalysisTable from '../grammar-analysis/getLR0AnalysisTable';
+import getSLR1AnalysisTable from '../grammar-analysis/getSLR1AnalysisTable';
 import deepEqual from '../utils/deepEqual';
 import * as vis from 'vis-network';
 import getSortedNFAStatuses from '../grammar-analysis/utils/sort/getSortedNFAStatuses';
@@ -18,7 +18,7 @@ export default function LR0AnalysisTableCompute(props: IProps) {
       return;
     }
 
-    const table = getLR0AnalysisTable(props.grammar);
+    const table = getSLR1AnalysisTable(props.grammar);
     if (table === null) {
       return;
     }
@@ -71,15 +71,15 @@ export default function LR0AnalysisTableCompute(props: IProps) {
     );
   }, [props, props.grammar]);
 
-  const generateLL1AnalysisTable = (grammar: Grammar) => {
+  const generateSLR0AnalysisTable = (grammar: Grammar) => {
     if (grammar.nonTerminals.length === 0 && grammar.terminals.length === 0) {
       return <Typography.Paragraph>Wait...</Typography.Paragraph>;
     }
-    const table = getLR0AnalysisTable(grammar);
+    const table = getSLR1AnalysisTable(grammar);
     console.log(table);
 
     if (table === null) {
-      return <Typography.Paragraph>This grammar is not a LR(0) grammar!</Typography.Paragraph>;
+      return <Typography.Paragraph>This grammar is not a SLR(1) grammar!</Typography.Paragraph>;
     }
 
     const firstRow = (
@@ -141,13 +141,13 @@ export default function LR0AnalysisTableCompute(props: IProps) {
 
   return (
     <Card
-      title="LR(0) Analysis Table"
+      title="SLR(1) Analysis Table"
       style={{
         marginTop: '20px'
       }}
     >
       <Row gutter={24}>
-        <Col span={9}>{generateLL1AnalysisTable(props.grammar)}</Col>
+        <Col span={9}>{generateSLR0AnalysisTable(props.grammar)}</Col>
         <Col span={15}>
           <Card type="inner" title="DFA Graph">
             <div ref={graphRef}></div>

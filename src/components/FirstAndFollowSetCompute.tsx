@@ -17,6 +17,7 @@ interface IRow {
 
 export default function FirstAndFollowSetCompute(props: IProps) {
   const getFirstAndFollowSetsOfSymbols = (grammar: Grammar) => {
+    
     const { nonTerminals, productions } = grammar;
     const data: IRow[] = [];
     data.push(
@@ -47,7 +48,12 @@ export default function FirstAndFollowSetCompute(props: IProps) {
       data.push(...temp);
     });
 
-    return data;
+    return data.reduce((res, cur) => {
+      if(res.findIndex(v => v.symbols === cur.symbols) === -1) {
+        return res.concat(cur);
+      }
+      return res;
+    }, [] as IRow[]);
   };
 
   return (

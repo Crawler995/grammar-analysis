@@ -16,7 +16,7 @@ interface RawProduction {
   right: string;
 }
 
-export default class GrammarInput extends React.Component<IProps, IState> {
+export default class GrammarInput extends React.PureComponent<IProps, IState> {
   state: IState = {
     grammar: {
       nonTerminals: [],
@@ -73,6 +73,7 @@ export default class GrammarInput extends React.Component<IProps, IState> {
   };
 
   render() {
+    console.log('render')
     return (
       <Card title="Input Grammar:">
         <Row gutter={24}>
