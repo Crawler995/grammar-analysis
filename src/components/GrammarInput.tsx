@@ -95,7 +95,7 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
                           >
                             <Input placeholder="left" />
                           </Form.Item>
-                          <span style={{ fontSize: '18px' }}>-></span>
+                          <span style={{ fontSize: '18px' }}>{'->'}</span>
                           <Form.Item
                             {...field}
                             name={[field.name, 'right']}
