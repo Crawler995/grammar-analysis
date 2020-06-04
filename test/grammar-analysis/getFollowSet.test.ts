@@ -194,4 +194,30 @@ describe('getFollowSet.ts (getFollowSet())', () => {
       expect(getFollowSet(grammar, "S'")).to.deep.equal([END, 'e']);
     });
   });
+
+  describe(`S'->S, S->AaAb|BbBa, B->EMPTY`, () => {
+    const grammar: Grammar = {
+      nonTerminals: ["S'", 'S', 'A', 'B'],
+      terminals: ['a', 'b'],
+      productions: [{
+        left: ["S'"],
+        right: [['S']]
+      }, {
+        left: ['S'],
+        right: [['A', 'a', 'A', 'b'], ['B', 'b', 'B', 'a']]
+      }, {
+        left: ['B'],
+        right: [[EMPTY]]
+      }],
+      startSymbol: "S'"
+    };
+
+    it('FOLLOW(A) = {a, b}', () => {
+      expect(getFollowSet(grammar, 'A')).to.deep.equal(['a', 'b']);
+    });
+
+    it('FOLLOW(B) = {a, b}', () => {
+      expect(getFollowSet(grammar, 'B')).to.deep.equal(['a', 'b']);
+    });
+  })
 });
