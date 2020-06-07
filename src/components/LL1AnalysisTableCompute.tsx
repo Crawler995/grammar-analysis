@@ -1,19 +1,18 @@
 import React from 'react';
 import { Card, Typography } from 'antd';
-import { Grammar } from '../grammar-analysis/types/grammar';
-import getLL1AnalysisTable from '../grammar-analysis/getLL1AnalysisTable';
+import { LL1AnalysisTable } from '../grammar-analysis/types/analysisTable';
 
 interface IProps {
-  grammar: Grammar;
+  table: LL1AnalysisTable | null | undefined;
 }
 
 export default function LL1AnalysisTableCompute(props: IProps) {
-  const generateLL1AnalysisTable = (grammar: Grammar) => {
-    if (grammar.nonTerminals.length === 0 && grammar.terminals.length === 0) {
+  const generateLL1AnalysisTable = () => {
+    const { table } = props;
+
+    if (table === undefined) {
       return <Typography.Paragraph>Wait...</Typography.Paragraph>;
     }
-    const table = getLL1AnalysisTable(grammar);
-    console.log(table);
 
     if (table === null) {
       return <Typography.Paragraph>This grammar is not a LL(1) grammar!</Typography.Paragraph>;
@@ -62,7 +61,7 @@ export default function LL1AnalysisTableCompute(props: IProps) {
         marginTop: '20px'
       }}
     >
-      {generateLL1AnalysisTable(props.grammar)}
+      {generateLL1AnalysisTable()}
     </Card>
   );
 }

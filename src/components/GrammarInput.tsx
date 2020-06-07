@@ -4,6 +4,8 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { EMPTY, PRIME, Grammar } from '../grammar-analysis/types/grammar';
 
 interface IProps {
+  onInput: () => void;
+  onConfirm: () => void;
   onStartCompute: (grammar: Grammar) => void;
 }
 
@@ -65,6 +67,8 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
       startSymbol: nonTerminals[0]
     };
 
+    this.props.onConfirm();
+
     this.setState({ grammar });
   };
 
@@ -73,7 +77,7 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
   };
 
   render() {
-    console.log('render')
+    console.log('render');
     return (
       <Card title="Input Grammar:">
         <Row gutter={24}>
@@ -93,7 +97,7 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
                               { required: true, message: 'Missing left part of production!' }
                             ]}
                           >
-                            <Input placeholder="left" />
+                            <Input placeholder="left" onChange={this.props.onInput} />
                           </Form.Item>
                           <span style={{ fontSize: '18px' }}>{'->'}</span>
                           <Form.Item
@@ -104,7 +108,7 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
                               { required: true, message: 'Missing right part of production!' }
                             ]}
                           >
-                            <Input placeholder="right" />
+                            <Input placeholder="right" onChange={this.props.onInput} />
                           </Form.Item>
                           <MinusCircleOutlined
                             style={{

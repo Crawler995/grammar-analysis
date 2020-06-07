@@ -1,24 +1,24 @@
 import React, { useEffect, useRef } from 'react';
 import { Card, Typography, Col, Row } from 'antd';
-import { Grammar } from '../grammar-analysis/types/grammar';
-import getSLR1AnalysisTable from '../grammar-analysis/getSLR1AnalysisTable';
 import deepEqual from '../utils/deepEqual';
 import * as vis from 'vis-network';
 import getSortedNFAStatuses from '../grammar-analysis/utils/sort/getSortedNFAStatuses';
+import { SLR1AnalysisTable } from '../grammar-analysis/types/analysisTable';
 
 interface IProps {
-  grammar: Grammar;
+  table: SLR1AnalysisTable | null | undefined;
 }
 
-export default function LR0AnalysisTableCompute(props: IProps) {
+export default function SLR1AnalysisTableCompute(props: IProps) {
   const graphRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (props.grammar.nonTerminals.length === 0 && props.grammar.terminals.length === 0) {
+    const { table } = props;
+
+    if (table === undefined) {
       return;
     }
 
-    const table = getSLR1AnalysisTable(props.grammar);
     if (table === null) {
       return;
     }
@@ -62,21 +62,23 @@ export default function LR0AnalysisTableCompute(props: IProps) {
       };
     });
 
-    new vis.Network(
-      graphRef.current!,
-      { nodes, edges },
-      {
-        height: `${Math.max(table.depDFA.statuses.length * 62, 400)}px`
-      }
-    );
-  }, [props, props.grammar]);
+    setTimeout(() => {
+      new vis.Network(
+        graphRef.current!,
+        { nodes, edges },
+        {
+          height: `${Math.max(table.depDFA.statuses.length * 62, 400)}px`
+        }
+      );
+    }, 100);
+  }, [props, props.table]);
 
-  const generateSLR0AnalysisTable = (grammar: Grammar) => {
-    if (grammar.nonTerminals.length === 0 && grammar.terminals.length === 0) {
+  const generateSLR1AnalysisTable = () => {
+    const { table } = props;
+
+    if (table === undefined) {
       return <Typography.Paragraph>Wait...</Typography.Paragraph>;
     }
-    const table = getSLR1AnalysisTable(grammar);
-    console.log(table);
 
     if (table === null) {
       return <Typography.Paragraph>This grammar is not a SLR(1) grammar!</Typography.Paragraph>;
@@ -147,7 +149,7 @@ export default function LR0AnalysisTableCompute(props: IProps) {
       }}
     >
       <Row gutter={24}>
-        <Col span={9}>{generateSLR0AnalysisTable(props.grammar)}</Col>
+        <Col span={9}>{generateSLR1AnalysisTable()}</Col>
         <Col span={15}>
           <Card type="inner" title="DFA Graph">
             <div ref={graphRef}></div>
