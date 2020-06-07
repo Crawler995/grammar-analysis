@@ -35,9 +35,9 @@ const getFollowSet = (
       let temp = item.slice(0);
       let preLen = 0;
 
-      while(true) {
+      while (true) {
         const pos = temp.indexOf(argument);
-        if(pos === -1) {
+        if (pos === -1) {
           break;
         }
 
@@ -49,20 +49,20 @@ const getFollowSet = (
       poses.forEach(pos => {
         if (pos > -1) {
           const followSetOfLeft = getFollowSet(grammar, left[0], [...cache, argument]);
-  
+
           // res includes FIRST(left)
           if (pos === item.length - 1) {
             res.push(...followSetOfLeft);
           }
-  
+
           const firstSetOfRightRest = getFirstSet(grammar, item.slice(pos + 1));
           res.push(...firstSetOfRightRest.filter(item => item !== EMPTY));
-  
+
           if (firstSetOfRightRest.includes(EMPTY)) {
             res.push(...followSetOfLeft);
           }
         }
-      })
+      });
     });
   });
 

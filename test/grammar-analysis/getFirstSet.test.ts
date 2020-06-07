@@ -198,32 +198,40 @@ describe('getFirstSet.ts (getFirstSet())', () => {
     const grammar: Grammar = {
       nonTerminals: ["S'", 'S', 'A', 'B'],
       terminals: ['a', 'b'],
-      productions: [{
-        left: ["S'"],
-        right: [['S']]
-      }, {
-        left: ['S'],
-        right: [['S', 'A', 'B'], ['B', 'A']]
-      }, {
-        left: ['A'],
-        right: [['a', 'A'], ['B']]
-      }, {
-        left: ['B'],
-        right: [['b']]
-      }],
+      productions: [
+        {
+          left: ["S'"],
+          right: [['S']]
+        },
+        {
+          left: ['S'],
+          right: [
+            ['S', 'A', 'B'],
+            ['B', 'A']
+          ]
+        },
+        {
+          left: ['A'],
+          right: [['a', 'A'], ['B']]
+        },
+        {
+          left: ['B'],
+          right: [['b']]
+        }
+      ],
       startSymbol: "S'"
     };
 
     it('FIRST(S) = {b}', () => {
-      expect(getFirstSet(grammar, ['S'])).to.deep.equal(['b'])
+      expect(getFirstSet(grammar, ['S'])).to.deep.equal(['b']);
     });
 
     it('FIRST(A) = {a, b}', () => {
-      expect(getFirstSet(grammar, ['A'])).to.deep.equal(['a', 'b'])
+      expect(getFirstSet(grammar, ['A'])).to.deep.equal(['a', 'b']);
     });
 
     it('FIRST(SAB) = {a, b}', () => {
-      expect(getFirstSet(grammar, ['S', 'A', 'B'])).to.deep.equal(['b'])
+      expect(getFirstSet(grammar, ['S', 'A', 'B'])).to.deep.equal(['b']);
     });
-  })
+  });
 });

@@ -199,16 +199,23 @@ describe('getFollowSet.ts (getFollowSet())', () => {
     const grammar: Grammar = {
       nonTerminals: ["S'", 'S', 'A', 'B'],
       terminals: ['a', 'b'],
-      productions: [{
-        left: ["S'"],
-        right: [['S']]
-      }, {
-        left: ['S'],
-        right: [['A', 'a', 'A', 'b'], ['B', 'b', 'B', 'a']]
-      }, {
-        left: ['B'],
-        right: [[EMPTY]]
-      }],
+      productions: [
+        {
+          left: ["S'"],
+          right: [['S']]
+        },
+        {
+          left: ['S'],
+          right: [
+            ['A', 'a', 'A', 'b'],
+            ['B', 'b', 'B', 'a']
+          ]
+        },
+        {
+          left: ['B'],
+          right: [[EMPTY]]
+        }
+      ],
       startSymbol: "S'"
     };
 
@@ -219,5 +226,5 @@ describe('getFollowSet.ts (getFollowSet())', () => {
     it('FOLLOW(B) = {a, b}', () => {
       expect(getFollowSet(grammar, 'B')).to.deep.equal(['a', 'b']);
     });
-  })
+  });
 });

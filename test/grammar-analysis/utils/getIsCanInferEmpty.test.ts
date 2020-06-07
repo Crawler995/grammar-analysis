@@ -81,24 +81,32 @@ describe('getInferredGSymbols.ts (getInferredGSymbols())', () => {
     const grammar: Grammar = {
       nonTerminals: ["S'", 'S', 'A', 'B'],
       terminals: ['a', 'b'],
-      productions: [{
-        left: ["S'"],
-        right: [['S']]
-      }, {
-        left: ['S'],
-        right: [['S', 'A', 'B'], ['B', 'A']]
-      }, {
-        left: ['A'],
-        right: [['a', 'A'], ['B']]
-      }, {
-        left: ['B'],
-        right: [['b']]
-      }],
+      productions: [
+        {
+          left: ["S'"],
+          right: [['S']]
+        },
+        {
+          left: ['S'],
+          right: [
+            ['S', 'A', 'B'],
+            ['B', 'A']
+          ]
+        },
+        {
+          left: ['A'],
+          right: [['a', 'A'], ['B']]
+        },
+        {
+          left: ['B'],
+          right: [['b']]
+        }
+      ],
       startSymbol: "S'"
     };
 
     it(`S can't infer EMPTY`, () => {
       expect(getIsCanInferEmpty(grammar, 'S')).to.be.equal(false);
     });
-  })
+  });
 });

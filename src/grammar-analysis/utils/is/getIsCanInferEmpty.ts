@@ -10,7 +10,7 @@ const getIsCanInferEmpty = (
   args: GSymbol,
   cache: NonTerminal[] = []
 ): boolean => {
-  if(cache.includes(args)) {
+  if (cache.includes(args)) {
     return false;
   }
 
@@ -27,7 +27,10 @@ const getIsCanInferEmpty = (
       }
 
       if (getCrossSet(candidate, grammar.terminals).length === 0) {
-        const res = candidate.reduce((res, cur) => res && getIsCanInferEmpty(grammar, cur, [...cache, args]), true);
+        const res = candidate.reduce(
+          (res, cur) => res && getIsCanInferEmpty(grammar, cur, [...cache, args]),
+          true
+        );
         if (res) return true;
       }
     }

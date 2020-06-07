@@ -19,7 +19,21 @@ export default function Header() {
         This can compute <b>FIRST(), FOLLOW(), LL(1) / LR(0) / SLR(1) Analysis Table</b> according
         to the given grammar.
       </Paragraph>
-      <Paragraph>I try my best to finish this assignment. About more, you can read this.</Paragraph>
+      <Paragraph>
+        I try my best to finish this assignment. About more, you can read the document in the
+        submitted zipped package.
+      </Paragraph>
+      <Paragraph>
+        And you can visit my{' '}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/Crawler995/grammar-analysis"
+        >
+          Github
+        </a>{' '}
+        to get more information, such as commit log and code frequency. ^^
+      </Paragraph>
     </PageHeader>
   );
 }
