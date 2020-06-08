@@ -21,7 +21,7 @@ export interface LL1AnalysisTable {
 
 export type State = number;
 export const S = (n: State) => `S${n}`;
-export const R = (n: State) => `R${n}`;
+export const R = (n: State) => `r${n}`;
 export const ACC = `acc`;
 
 export interface LR0AnalysisTable {
