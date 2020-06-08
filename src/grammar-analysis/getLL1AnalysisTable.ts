@@ -8,7 +8,7 @@ import GrammarNChomskyType from './types/grammarNChomskyType';
 
 const getLL1AnalysisTable = (grammar: Grammar): LL1AnalysisTable | null => {
   if (getGrammarNChomskyType(grammar) === GrammarNChomskyType.OTHER) {
-    throw new Error('you should give a two grammar at least.');
+    return null;
   }
 
   const res: LL1AnalysisTable = {

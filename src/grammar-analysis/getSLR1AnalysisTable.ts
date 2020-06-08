@@ -10,7 +10,7 @@ import GrammarNChomskyType from './types/grammarNChomskyType';
 
 const getSLR1AnalysisTable = (grammar: Grammar): SLR1AnalysisTable | null => {
   if (getGrammarNChomskyType(grammar) === GrammarNChomskyType.OTHER) {
-    throw new Error('you should give a two grammar at least.');
+    return null;
   }
 
   const depNFA = getNFAFromGrammar(grammar);

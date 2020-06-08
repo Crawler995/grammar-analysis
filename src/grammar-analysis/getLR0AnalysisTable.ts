@@ -9,7 +9,7 @@ import GrammarNChomskyType from './types/grammarNChomskyType';
 
 const getLR0AnalysisTable = (grammar: Grammar): LR0AnalysisTable | null => {
   if (getGrammarNChomskyType(grammar) === GrammarNChomskyType.OTHER) {
-    throw new Error('you should give a two grammar at least.');
+    return null;
   }
 
   const depNFA = getNFAFromGrammar(grammar);
