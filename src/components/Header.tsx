@@ -20,11 +20,11 @@ export default function Header() {
         to the given grammar.
       </Paragraph>
       <Paragraph>
-        I try my best to finish this assignment. About more, you can read the document in the
+        <span role="img" aria-label="">🔥</span> I try my best to finish this assignment. About more, you can read the document in the
         submitted zipped package.
       </Paragraph>
       <Paragraph>
-        And you can visit my{' '}
+        <span role="img" aria-label="">😉</span> And you can visit my{' '}
         <a
           target="_blank"
           rel="noopener noreferrer"
@@ -32,7 +32,7 @@ export default function Header() {
         >
           Github
         </a>{' '}
-        to get more information, such as commit log and code frequency. ^^
+        to get more information about this project, such as commit log and code frequency.
       </Paragraph>
     </PageHeader>
   );

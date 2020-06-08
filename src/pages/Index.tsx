@@ -19,6 +19,8 @@ import getFirstSetAndFollowSet, {
 import getLL1AnalysisTable from '../grammar-analysis/getLL1AnalysisTable';
 import getLR0AnalysisTable from '../grammar-analysis/getLR0AnalysisTable';
 import getSLR1AnalysisTable from '../grammar-analysis/getSLR1AnalysisTable';
+import Summary from '../components/Summary';
+import Footer from '../components/Footer';
 
 interface IState {
   stepsStatus: boolean[];
@@ -64,21 +66,32 @@ export default class Index extends React.Component<{}, IState> {
       ]
     });
 
-    message.info("All computations have finished!")
+    message.info('All computations have finished!');
   };
 
+  getGrammarTypes = () => {
+    const {stepsStatus} = this.state;
+
+    if(stepsStatus[2] === undefined) {
+      return null;
+    }
+
+    const grammarTables = stepsStatus.slice(2, 5);
+    return ['LL(1)', 'LR(0)', 'SLR(1)'].filter((t, i) => grammarTables[i]);
+  }
+
   confirmHandler = () => {
-    message.success("You've confirm the grammar, now you can start to compute!")
+    message.success("You've confirm the grammar, now you can start to compute!");
     this.setState({
       stepsStatus: [true].concat(new Array(5).fill(undefined))
-    })
-  }
+    });
+  };
 
   inputHandler = () => {
     this.setState({
       stepsStatus: new Array(6).fill(undefined)
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -106,6 +119,8 @@ export default class Index extends React.Component<{}, IState> {
               <LR0AnalysisTableCompute table={this.state.computeRes.lr0AnalysisTable} />
 
               <SLR1AnalysisTableCompute table={this.state.computeRes.slr1AnalysisTable} />
+
+              <Summary grammarTypes={this.getGrammarTypes()} />
             </main>
           </Col>
 
@@ -113,6 +128,8 @@ export default class Index extends React.Component<{}, IState> {
             <AnalysisSteps statues={this.state.stepsStatus} />
           </Col>
         </Row>
+
+        <Footer />
 
         <BackTop />
       </div>
