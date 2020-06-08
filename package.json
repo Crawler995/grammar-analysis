@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5",
+    "opencollective": "1.0.3",
     "vis-data": "^6.5.3",
     "vis-network": "^7.6.9",
     "vis-util": "^4.0.2"
@@ -25,8 +26,7 @@
     "LR0-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-analysis/getLR0AnalysisTable.test.ts'",
     "SLR1-test": "cross-env TS_NODE_PROJECT=\"tsconfig.test.json\" mocha --require ts-node/register './test/grammar-analysis/getSLR1AnalysisTable.test.ts'",
     "start": "react-scripts start",
-    "format": "prettier --config .prettierrc --write ./{src,test}/**/*.{ts,tsx}",
-    "eject": "react-scripts eject"
+    "format": "prettier --config .prettierrc --write ./{src,test}/**/*.{ts,tsx}"
   },
   "eslintConfig": {
     "extends": "react-app"
