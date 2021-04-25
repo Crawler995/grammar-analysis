@@ -11,6 +11,7 @@ interface IProps {
 
 interface IState {
   grammar: Grammar;
+  confirmed: boolean;
 }
 
 interface RawProduction {
@@ -25,7 +26,8 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
       terminals: [],
       productions: [],
       startSymbol: ''
-    }
+    },
+    confirmed: false
   };
 
   mergePrime = (arr: string[]) => {
@@ -69,12 +71,17 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
 
     this.props.onConfirm();
 
-    this.setState({ grammar });
+    this.setState({ grammar, confirmed: true });
   };
 
   startComputeHandler = () => {
     this.props.onStartCompute(this.state.grammar);
   };
+
+  inputHandler = () => {
+    this.props.onInput()
+    this.setState({ confirmed: false });
+  }
 
   render() {
     console.log('render');
@@ -97,7 +104,7 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
                               { required: true, message: 'Missing left part of production!' }
                             ]}
                           >
-                            <Input placeholder="left" onChange={this.props.onInput} />
+                            <Input placeholder="left" onChange={this.inputHandler} />
                           </Form.Item>
                           <span style={{ fontSize: '18px' }}>{'->'}</span>
                           <Form.Item
@@ -108,7 +115,7 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
                               { required: true, message: 'Missing right part of production!' }
                             ]}
                           >
-                            <Input placeholder="right" onChange={this.props.onInput} />
+                            <Input placeholder="right" onChange={this.inputHandler} />
                           </Form.Item>
                           <MinusCircleOutlined
                             style={{
@@ -145,7 +152,7 @@ export default class GrammarInput extends React.PureComponent<IProps, IState> {
               </Form.Item>
 
               <Form.Item>
-                <Button type="primary" htmlType="button" onClick={this.startComputeHandler}>
+                <Button type="primary" htmlType="button" onClick={this.startComputeHandler} disabled={!this.state.confirmed}>
                   Start to Compute!
                 </Button>
               </Form.Item>

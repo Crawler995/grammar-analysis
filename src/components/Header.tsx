@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <PageHeader title="Grammar Analysis">
       <Descriptions column={3}>
-        <Descriptions.Item label="Name">Qinglong Zhang</Descriptions.Item>
+        <Descriptions.Item label="Student">Qinglong Zhang</Descriptions.Item>
         <Descriptions.Item label="ID">1120172135</Descriptions.Item>
         <Descriptions.Item label="Class">08111702</Descriptions.Item>
       </Descriptions>
@@ -20,11 +20,7 @@ export default function Header() {
         to the given grammar.
       </Paragraph>
       <Paragraph>
-        <span role="img" aria-label="">🔥</span> I try my best to finish this assignment. About more, you can read the document in the
-        submitted zipped package.
-      </Paragraph>
-      <Paragraph>
-        <span role="img" aria-label="">😉</span> And you can visit my{' '}
+        <span role="img" aria-label="">😉</span> Visit my{' '}
         <a
           target="_blank"
           rel="noopener noreferrer"
@@ -32,7 +28,7 @@ export default function Header() {
         >
           Github
         </a>{' '}
-        to get more information about this project, such as commit log and code frequency.
+        to get more information about this project, such as design / usage documentation.
       </Paragraph>
     </PageHeader>
   );
